@@ -56,3 +56,32 @@
     <%= time_ago_in_words(@the_director.updated_at) %> ago
   </dd>
 </dl>
+
+<h1>  Filmography  </h1>
+
+<table border="1" >
+
+    <tr>
+        <th> ID </th>
+        <th> Image </th>
+        <th> Title </th>
+        <th> Year </th>
+        <th> Director </th>
+        <th>        </th>
+    </tr>
+
+  <% @the_movies_array.each do |a_movie| %>
+    <tr>
+      <td> <%= a_movie.id %> </td>
+      <td> <img src = "<%= a_movie.image %>" style="width:250px;"> </td>
+      <td> <%= a_movie.title %> </td>
+      <td> <%= a_movie.year %> </td>
+      <td> 
+        <% d = Director.where({:id => a_movie.director_id}).at(0) %> 
+        <%= d.name %>
+      </td>
+      <td> <a href="/movies/<%= a_movie.id %>"> Show details </a>
+    </tr>
+  <% end %>
+
+</table>
